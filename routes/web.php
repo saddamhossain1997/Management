@@ -6,6 +6,7 @@ use App\Http\Controllers\BricksController;
 use App\Http\Controllers\EstimateFloorController;
 use App\Http\Controllers\EstimateProjectController;
 use App\Http\Controllers\PlasterController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,8 +33,10 @@ Route::post('/add/big/apple', [BigappleController::class, 'storeBig'])->name('st
 Route::get('/details/big/apple/{id}', [BigappleController::class, 'detailBig'])->name('detailBig');
 // ==============bricks==========================
 Route::get('/bricks', [BricksController::class, 'showBricks'])->name('showBricks');
+Route::get('/bricks/add', [BricksController::class, 'showBricksAdd'])->name('showBricksAdd');
 Route::get('/bricks/show', [BricksController::class, 'showBricksPage'])->name('showBricksPage');
-Route::post('/add/big/bricks', [BricksController::class, 'storeBricks'])->name('storeBricks');
+// Route::post('/add/big/bricks', [BricksController::class, 'storeBricks'])->name('storeBricks');
+Route::post('/add/big/bricks/extra', [BricksController::class, 'storeBricksExtra'])->name('storeBricksExtra');
 
 
 Route::get('/details/big/bricks/{id}', [BricksController::class, 'detailBricks'])->name('detailBricks');

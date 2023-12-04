@@ -3,39 +3,43 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brick;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class BricksController extends Controller
 {
+
+    public function showBricksAdd()
+    {
+        $bricks = Brick::all();
+        return view('admin.bricks.bricks_costing');
+    }
     public function showBricks()
     {
         $bricks = Brick::all();
-        return view('admin.bricks.bricks_costing', compact('bricks'));
+        return view('admin.bricks.bricks_costing_table');
     }
 
-    public function storeBricks(Request $request)
+    public function storeBricksExtra(Request $request)
     {
 
 
         $bricks = new Brick();
         $bricks->FloorQuantity = $request->FloorQuantity;
-        $bricks->TotalMortars =  $request->TotalMortars;
-        $bricks->Thickness = $request->Thickness;
+        $bricks->BrickSize = $request->BrickSize;
         $bricks->FirstRatio = $request->FirstRatio;
         $bricks->SecondRatio = $request->SecondRatio;
+        $bricks->DryMortar = $request->DryMortar;
+        $bricks->Mortar = $request->Mortar;
         $bricks->date = $request->date;
         $bricks->note = $request->note;
-        $bricks->TotalBricks = $request->TotalBricks;
-        $bricks->TotalSquareFeet = $request->TotalSquareFeet;
         $bricks->SandsCostPerCft = $request->SandsCostPerCft;
         $bricks->CementCostPerBag = $request->CementCostPerBag;
         $bricks->BricksCostPerPcs = $request->BricksCostPerPcs;
-        $bricks->DryMortar = $request->DryMortar;
-        $bricks->Mortar = $request->Mortar;
-        $bricks->BrickSize = $request->BrickSize;
         $bricks->save();
 
-        return response()->json(['message' => 'Data stored successfully', 'data' => $bricks]);
+
+        return redirect()->route('showBricks')->with('success', 'this is data successfully');
     }
 
     public function detailBricks($id)
