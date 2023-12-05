@@ -31,14 +31,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach( $bricks as $brick)
+
 
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href="#">Details</a></td>
+                                    <td>{{$brick->date}}</td>
+                                    <td>{{$brick->id}}</td>
+                                    <td>{{$brick->BricksExtra->TotalBricks}}</td>
+                                    <td>{{$brick->DryMortar}}</td>
+                                    <td><a href="{{route('showBricksDetails',$brick->id)}}">Details</a></td>
                                 </tr>
+                                @endforeach
 
                             </tbody>
 

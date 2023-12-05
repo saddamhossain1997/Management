@@ -30,25 +30,26 @@
                                 </div>
                             </div>
                             <hr>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
                                                 <th>Bricks Configure No.</th>
-                                                <td>{{ $details->id}}</td>
+                                                <td>{{ @$details->id}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Bricks Configure Date</th>
-                                                <td>{{ $details->date}}</td>
+                                                <td>{{ @$details->date}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Floor Quantity</th>
-                                                <td>{{ $details->FloorQuantity}}</td>
+                                                <td>{{ @$details->FloorQuantity}}</td>
                                             </tr>
                                             <tr>
-                                                <th>Total Cement</th>
-                                                <td>1 Cft</td>
+                                                <th>Total Cement Bag</th>
+                                                <td>{{ @$details->sum('CementCostPerBag')}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Total Cement</th>
@@ -56,11 +57,11 @@
                                             </tr>
                                             <tr>
                                                 <th>Total Sands</th>
-                                                <td>3.99 Cft</td>
+                                                <td>{{ @$details->sum('SandsCostPerCft')}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Note </th>
-                                                <td>Note for testing</td>
+                                                <td>{{ @$details->note}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -74,7 +75,7 @@
                                             </tr>
                                             <tr>
                                                 <th>Ratio</th>
-                                                <td>1:4</td>
+                                                <td>{{ @$details->FirstRatio}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -96,7 +97,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td> {{ $details->TotalSquareFeet}}</td>
+                                                <td> {{ @$details->TotalSquareFeet}}</td>
                                                 <td> 30.00</td>
                                                 <td> 144.58</td>
                                                 <td> 4.99</td>
@@ -129,9 +130,9 @@
                                                 <th class="text-center">Sands Price (Cft)</th>
                                             </tr>
                                             <tr>
-                                                <td class="text-center">৳ 1445.78 Taka</td>
-                                                <td class="text-center">৳ 439.19 Taka</td>
-                                                <td class="text-center">৳ 79.85 Taka</td>
+                                                <td class="text-center">৳ {{ @$details->BricksCostPerPcs}}Taka</td>
+                                                <td class="text-center">৳ {{ @$details->CementCostPerBag}} Taka</td>
+                                                <td class="text-center">৳ {{ @$details->SandsCostPerCft}} Taka</td>
                                             </tr>
                                         </tbody>
                                     </table>

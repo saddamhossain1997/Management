@@ -181,7 +181,7 @@
                                                 <input type="number" onchange="inputClaculator(this)" class="form-control thickness" name="thickness[]">
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control thickness" id="getValues" name="total-bricks[]">
+                                                <input type="number" class="form-control thickness" id="getValues" name="total_bricks[]">
                                             </td>
                                             <td class="sub-total-morter">0.00</td>
                                             <td class="text-center">
@@ -199,7 +199,7 @@
                                                 <button type="button" class="btn btn-info btn-sm" onclick="addMore()">Add More</button>
                                             </td>
                                             <th class="text-right">Get Total Bricks</th>
-                                            <th id="total-bricks"> <input type="number" placeholder="0.00" class="form-control thickness" name="getTotal[]" id="getTotal"></th>
+                                            <th id="total-bricks"> <input type="number" placeholder="0.00" class="form-control thickness" name="getTotal" id="getTotal"></th>
                                             <th id="total-morters">h</th>
                                             <td></td>
                                         </tr>
@@ -242,7 +242,7 @@
         var qty = document.getElementsByName("square_feet[]")[index].value;
         var price = document.getElementsByName("thickness[]")[index].value;
         var total = qty * price;
-        document.getElementsByName("total-bricks[]")[index].value = total;
+        document.getElementsByName("total_bricks[]")[index].value = total;
 
         GetTotal();
     }
@@ -250,7 +250,7 @@
     function GetTotal() {
 
         var sum = 0;
-        var amounts = document.getElementsByName("total-bricks[]");
+        var amounts = document.getElementsByName("total_bricks[]");
         for (let index = 0; index < amounts.length; index++) {
 
             var amt = amounts[index].value;

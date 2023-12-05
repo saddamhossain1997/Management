@@ -35,6 +35,7 @@ Route::get('/details/big/apple/{id}', [BigappleController::class, 'detailBig'])-
 Route::get('/bricks', [BricksController::class, 'showBricks'])->name('showBricks');
 Route::get('/bricks/add', [BricksController::class, 'showBricksAdd'])->name('showBricksAdd');
 Route::get('/bricks/show', [BricksController::class, 'showBricksPage'])->name('showBricksPage');
+Route::get('/bricks/show/details/{details_id}', [BricksController::class, 'showBricksDetails'])->name('showBricksDetails');
 // Route::post('/add/big/bricks', [BricksController::class, 'storeBricks'])->name('storeBricks');
 Route::post('/add/big/bricks/extra', [BricksController::class, 'storeBricksExtra'])->name('storeBricksExtra');
 

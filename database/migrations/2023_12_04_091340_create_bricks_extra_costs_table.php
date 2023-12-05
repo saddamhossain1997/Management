@@ -15,6 +15,7 @@ class CreateBricksExtraCostsTable extends Migration
     {
         Schema::create('bricks_extra_costs', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('brick_id')->nullable();
             $table->string('TotalSquareFeet')->nullable();
             $table->string('Thickness')->nullable();
             $table->string('TotalBricks')->nullable();
