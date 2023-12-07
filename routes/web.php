@@ -36,15 +36,20 @@ Route::get('/bricks', [BricksController::class, 'showBricks'])->name('showBricks
 Route::get('/bricks/add', [BricksController::class, 'showBricksAdd'])->name('showBricksAdd');
 Route::get('/bricks/show', [BricksController::class, 'showBricksPage'])->name('showBricksPage');
 Route::get('/bricks/show/details/{details_id}', [BricksController::class, 'showBricksDetails'])->name('showBricksDetails');
-// Route::post('/add/big/bricks', [BricksController::class, 'storeBricks'])->name('storeBricks');
 Route::post('/add/big/bricks/extra', [BricksController::class, 'storeBricksExtra'])->name('storeBricksExtra');
-
-
 Route::get('/details/big/bricks/{id}', [BricksController::class, 'detailBricks'])->name('detailBricks');
 // ==============plaster==========================
 Route::get('/plaster', [PlasterController::class, 'showPlaster'])->name('showPlaster');
-Route::post('/add/big/plaster', [PlasterController::class, 'storePlaster'])->name('storePlaster');
+Route::get('/plaster/add', [PlasterController::class, 'showPlasterAdd'])->name('showPlasterAdd');
+Route::get('/plaster/show', [PlasterController::class, 'showPlasterPage'])->name('showPlasterPage');
+Route::get('/plaster/show/details/{plaster_id}', [PlasterController::class, 'showPlasterDetails'])->name('showPlasterDetails');
+Route::post('/add/big/plaster/extra', [PlasterController::class, 'storePlasterExtra'])->name('storePlasterExtra');
 Route::get('/details/big/plaster/{id}', [PlasterController::class, 'detailPlaster'])->name('detailPlaster');
+
+
+
+
+
 // ==============Estimation project==========================
 Route::get('/estimate/project', [EstimateProjectController::class, 'showEstimateProject'])->name('showEstimateProject');
 Route::post('/add/big/estimate', [EstimateProjectController::class, 'storeEstimateProject'])->name('storeEstimateProject');
@@ -53,3 +58,6 @@ Route::get('/details/big/estimate/{id}', [EstimateProjectController::class, 'det
 Route::get('/estimate/floor', [EstimateFloorController::class, 'showEstimateFloor'])->name('showEstimateFloor');
 Route::post('/add/big/floor', [EstimateFloorController::class, 'storeEstimateFloor'])->name('storeEstimateFloor');
 Route::get('/add/active/{id}', [EstimateFloorController::class, 'Active'])->name('Active');
+
+// ====================banks route start ========================
+// ====================banks route end ========================

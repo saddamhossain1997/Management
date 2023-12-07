@@ -1,180 +1,230 @@
 @extends('layouts.master')
 @section('content')
 
-<section class="content">
+<div class="content">
     <div class="container-fluid">
-        <div class="row ">
-            <div class="col-12">
-                <!-- /.card -->
-
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"> Add Bricks Configure</button>
-                        </h3>
-
-
-
-                        <div id="successMessage" style="display: none; color:blue; text-align:end">
-
-                        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header with-border">
+                        <h3 class="card-title">Bricks Configure Information</h3>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Data:</th>
-                                    <th>Configure No:</th>
-                                    <th>Total Bricks:</th>
-                                    <th>Total Mortar(DRY):</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ( $plasters as $plaster)
-                                <tr>
-                                    <td>{{$plaster->date}}</td>
-                                    <td>{{$plaster->id}}</td>
-                                    <td>{{$plaster->TotalBricks}}</td>
-                                    <td>{{$plaster->DryMortar}}</td>
-                                    <td><a href="{{route('detailPlaster',$plaster->id)}}">Details</a></td>
-                                </tr>
-                                @endforeach
-                            </tbody>
+                    <!-- form start -->
+                    <form method="POST" action="{{route('storePlasterExtra')}}">
+                        @csrf
 
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group ">
+                                        <label>Floor Quantity</label>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="floor_number" name="FloorQuantity">
+                                        </div>
+                                        <!-- /.input group -->
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group ">
+                                        <label>Dry Morter</label>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="DryMortar" name="DryMortar" placeholder="Dry Morter">
+                                        </div>
+                                        <!-- /.input group -->
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group ">
+                                        <label>First Ratio</label>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="FirstRatio" name="FirstRatio" value="" placeholder="First Ratio">
+                                        </div>
+                                        <!-- /.input group -->
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group ">
+                                        <label>Second Ratio</label>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="SecondRatio" name="SecondRatio" placeholder="Second Ratio">
+                                        </div>
+                                        <!-- /.input group -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label>Date</label>
+
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+
+                                            </div>
+                                            <input type="date" class="form-control pull-right" id="date" name="date">
+                                        </div>
+                                        <!-- /.input group -->
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label>Note</label>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="note" name="note">
+                                        </div>
+                                        <!-- /.input group -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <u><i>
+                                    <h3>Costing Area</h3>
+                                </i></u>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group ">
+                                        <label>Cement Cost(Per Bag)</label>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="plasterCostPerPcs" placeholder="Enter Bricks Costing">
+                                        </div>
+                                        <!-- /.input group -->
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group ">
+                                        <label>Sands Cost(Per Cft)</label>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="plasterCementCostPerBag" placeholder="Enter Per Bag Cement Costing">
+                                        </div>
+                                        <!-- /.input group -->
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th> Plaster Area</th>
+                                            <th>Side</th>
+                                            <th>Plaster Thickness</th>
+                                            <th>Total Plaster Area(Wet)</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="TBody">
+
+                                        <tr id="TRow" class="d-none">
+                                            <td>
+                                                <input type="number" step="any" class="form-control square_feet" onchange="inputClaculator(this)" name="square_feet[]">
+                                            </td>
+                                            <td>
+                                                <input type="number" onchange="inputClaculator(this)" class="form-control thickness" name="thickness[]">
+                                            </td>
+                                            <td>
+                                                <input type="number" onchange="inputClaculator(this)" class="form-control thickness" name="Plaster[]">
+                                            </td>
+
+                                            <td>
+                                                <input type="number" class="form-control thickness" id="getValues" name="total_bricks[]">
+                                            </td>
+
+                                            <td class="text-center">
+                                                <a role="button" onclick="ramoveData(this)" class="btn btn-danger btn-sm btn-remove">X</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+
+                                    <tfoot>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-sm" onclick="addMore()">Add More</button>
+                                            </td>
+                                            <th class="text-right">Get Total Plaster</th>
+                                            <th id="total-bricks"> <input type="number" placeholder="0.00" class="form-control thickness" name="getTotal" id="getTotal"></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
                 </div>
-                <!-- /.card -->
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
+
     </div>
     <!-- /.container-fluid -->
-</section>
-
-<!-- ==================modal====================== -->
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Casting Configure Information</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <form id="yourForm" method="post">
-                    @csrf
-                    <div class="row">
-
-
-
-
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">FirstRatio:</label>
-                                <input type="number" name="FirstRatio" class="form-control" id="recipient-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">SecondRatio:</label>
-                                <input type="number" name="SecondRatio" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">FloorQuantity:</label>
-                                <input type="number" name="FloorQuantity" placeholder="20.50" readonly class="form-control" id="recipient-name">
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">DryMortar:</label>
-                                <input type="number" name="DryMortar" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Date:</label>
-                                <input type="date" name="date" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">CementCostPerBag:</label>
-                                <input type="text" name="CementCostPerBag" class="form-control" id="recipient-name">
-
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">SandsCostPerCft:</label>
-                                <input type="text" name="SandsCostPerCft" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">PlasterArea:</label>
-                                <input type="text" name="PlasterArea" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Side:</label>
-                                <input type="text" name="Side" class="form-control" id="recipient-name">
-                            </div>
-                        </div>
-
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">PlasterThickness:</label>
-                                <input type="text" name="PlasterThickness" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">TotalPlasterArea:</label>
-                                <input type="text" name="TotalPlasterArea" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="col-form-label">Note:</label>
-                                <textarea class="form-control" name="note" rows="3" id="message-text"></textarea>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-
-
-            <div class="modal-footer">
-                <button type="button" id="p" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-            </form>
-
-        </div>
-
-    </div>
 </div>
 
-
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#yourForm').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '{{ route("storePlaster") }}',
-                data: $(this).serialize(),
-                success: function(response) {
+    function addMore() {
+        var v = $("#TRow").clone().appendTo("#TBody");
+        v.find("input").val("");
+        v.removeClass("d-none");
+
+    }
+
+    function ramoveData(v) {
+        $(v).parent().parent().remove();
+
+    }
+
+    function inputClaculator(v) {
+        var index = $(v).parent().parent().index();
 
 
-                    $('#successMessage').html(response.message).fadeIn().delay(3000).fadeOut();
-                    $('#exampleModal').modal('hide');
+        var qty = document.getElementsByName("square_feet[]")[index].value;
+        var price = document.getElementsByName("thickness[]")[index].value;
+        var Plaster = document.getElementsByName("Plaster[]")[index].value;
+        var total = qty * price * Plaster;
+        document.getElementsByName("total_bricks[]")[index].value = total;
 
-                    // Handle success response
-                },
-                error: function(error) {
-                    console.log(error);
-                    // Handle error response
-                }
-            });
-        });
-    });
+        GetTotal();
+    }
+
+    function GetTotal() {
+
+        var sum = 0;
+        var amounts = document.getElementsByName("total_bricks[]");
+        for (let index = 0; index < amounts.length; index++) {
+
+            var amt = amounts[index].value;
+            sum = +(sum) + +(amt);
+
+        }
+        document.getElementById("getTotal").value = sum;
+
+    }
 </script>
 
 @endsection

@@ -15,14 +15,15 @@ class CreatePlastersTable extends Migration
     {
         Schema::create('plasters', function (Blueprint $table) {
             $table->id();
+            $table->string('FloorQuantity')->nullable();
             $table->string('FirstRatio')->nullable();
             $table->string('SecondRatio')->nullable();
-            $table->string('FloorQuantity')->nullable();
             $table->string('DryMortar')->nullable();
             $table->date('date')->nullable();
             $table->text('note')->nullable();
+            $table->float('PlasterCostPerPcs')->nullable();
             $table->float('CementCostPerBag')->nullable();
-            $table->float('SandsCostPerCft')->nullable();
+
             $table->float('PlasterArea')->nullable();
             $table->float('Side')->nullable();
             $table->float('PlasterThickness')->nullable();

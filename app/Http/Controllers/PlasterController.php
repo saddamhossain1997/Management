@@ -3,43 +3,70 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plaster;
+use App\Models\PlasterExtraCost;
 use Illuminate\Http\Request;
 
 class PlasterController extends Controller
 {
-    public function showPlaster()
+
+    public function showPlasterDetails($id)
     {
-        $plasters = Plaster::all();
-        return view('admin.plaster.plaster_costing', compact('plasters'));
-    }
-
-    public function storePlaster(Request $request)
-    {
-
-
-        $plasters = new Plaster();
-        $plasters->FirstRatio = $request->FirstRatio;
-        $plasters->SecondRatio =  $request->SecondRatio;
-        $plasters->FloorQuantity = $request->FloorQuantity;
-        $plasters->DryMortar = $request->DryMortar;
-        $plasters->CementCostPerBag = $request->CementCostPerBag;
-        $plasters->date = $request->date;
-        $plasters->note = $request->note;
-        $plasters->SandsCostPerCft = $request->SandsCostPerCft;
-        $plasters->PlasterArea = $request->PlasterArea;
-        $plasters->side = $request->side;
-        $plasters->PlasterThickness = $request->PlasterThickness;
-        $plasters->TotalPlasterArea = $request->TotalPlasterArea;
-        $plasters->save();
-        // $request->session()->flash('success', 'Plaster was successful!');
-
-        return response()->json(['message' => 'Data stored successfully', 'data' => $plasters]);
-    }
-
-    public function detailPlaster($id)
-    {
-        $details = Plaster::where('id', $id)->latest()->first();
+        // $details = BricksExtraCost::where('brick_id', $id)->latest()->first();
+        $details = Plaster::with('PlasterExtra')->latest()->first();
 
         return view('admin.plaster.plaster_costing_details', compact('details'));
+    }
+
+    public function showPlasterAdd()
+    {
+        $bricks = Plaster::all();
+        return view('admin.plaster.plaster_costing');
+    }
+    public function showPlaster()
+    {
+
+        $plasters = Plaster::with('PlasterExtra')->get();
+
+        return view('admin.plaster.plaster_costing_table', compact('plasters'));
+    }
+
+    public function storePlasterExtra(Request $request)
+    {
+
+        // dd($request->all());
+        $plaster = new Plaster();
+        $plaster->FloorQuantity = $request->FloorQuantity;
+        $plaster->DryMortar = $request->DryMortar;
+        $plaster->FirstRatio = $request->FirstRatio;
+        $plaster->SecondRatio = $request->SecondRatio;
+        $plaster->date = $request->date;
+        $plaster->note = $request->note;
+        $plaster->PlasterCostPerPcs = $request->plasterCostPerPcs;
+        $plaster->CementCostPerBag = $request->plasterCementCostPerBag;
+        $plaster->save();
+        $insertData = [];
+        for ($i = 0; $i < count($request->square_feet); $i++) {
+
+            $insertData[] = [
+                'plaster_id' => $plaster->id,
+                'PlasterArea' => $request->square_feet[$i],
+                'Side' => $request->thickness[$i],
+                'PlasterThickness' => $request->Plaster[$i],
+                'TotalPlasterArea' => $request->total_bricks[$i],
+                'TotalPlaster' => $request->getTotal,
+            ];
+        }
+        PlasterExtraCost::insert($insertData);
+
+
+        return redirect()->route('showPlaster')->with('success', 'this is data successfully');
+    }
+
+
+    // ===============test=======================
+    public function showPlasterPage()
+    {
+        $bricks = Plaster::all();
+        return view('admin.plaster.plaster_costing', compact('bricks'));
     }
 }

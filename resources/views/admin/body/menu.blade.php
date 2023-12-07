@@ -168,6 +168,12 @@
                         <li class="nav-item">
                             <a href="{{route('showBig')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
+                                <p>Banks</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('showBig')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
                                 <p>Branch</p>
                             </a>
                         </li>
