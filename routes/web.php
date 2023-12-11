@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\BigappleController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BricksController;
 use App\Http\Controllers\EstimateFloorController;
 use App\Http\Controllers\EstimateProjectController;
@@ -60,4 +62,13 @@ Route::post('/add/big/floor', [EstimateFloorController::class, 'storeEstimateFlo
 Route::get('/add/active/{id}', [EstimateFloorController::class, 'Active'])->name('Active');
 
 // ====================banks route start ========================
+Route::get('/estimate/bank', [BankController::class, 'showBank'])->name('showBank');
+Route::get('/estimate/bank/store/page', [BankController::class, 'showBankPage'])->name('showBankPage');
+Route::post('/add/big/bank', [BankController::class, 'storeBank'])->name('storeBank');
+Route::get('/bank/active/{bank_id}', [BankController::class, 'ActiveBank'])->name('ActiveBank');
 // ====================banks route end ========================
+// ====================branch route start ========================
+Route::get('/branch/floor', [BranchController::class, 'showBranch'])->name('showBranch');
+Route::post('/add/big/branch', [BranchController::class, 'storeBranch'])->name('storeBranch');
+Route::get('/branch/active/{id}', [BranchController::class, 'ActiveBranch'])->name('ActiveBranch');
+// ====================branch route end ========================
