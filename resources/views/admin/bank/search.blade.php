@@ -12,13 +12,13 @@
                         <h3 class="card-title">
                             <a class="btn btn-primary" href="{{route('showBankPage')}}">Add Bank</a>
                         </h3>
-                        <!-- <form action="{{route('search')}}" method="post">
+                        <form action="{{route('search')}}" method="post">
                             @csrf
                             <h3>
                                 <input type="date" name="search">
                                 <button type="submit">Search</button>
                             </h3>
-                        </form> -->
+                        </form>
                         <div id="successMessage" style="display: none; color:blue; text-align:end">
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $banks as $bank)
+                                @foreach( $formatDates as $bank)
                                 <tr>
                                     <td>{{$bank->date}}</td>
                                     <td>{{$bank->bank_name}}</td>

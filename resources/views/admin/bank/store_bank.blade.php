@@ -16,6 +16,14 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group row ">
+                                <label class="col-sm-2 control-label">Date *</label>
+
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" placeholder="Enter Name" name="date" value="">
+
+                                </div>
+                            </div>
+                            <div class="form-group row ">
                                 <label class="col-sm-2 control-label">Name *</label>
 
                                 <div class="col-sm-10">

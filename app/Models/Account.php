@@ -5,19 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Branch extends Model
+class Account extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
+    // Relationship with the Bank model
     public function bank()
     {
         return $this->belongsTo(Bank::class, 'bank_id');
     }
 
-
-    // Relationship with the Account model
-    public function accounts()
+    // Relationship with the Branch model
+    public function branch()
     {
-        return $this->hasMany(Account::class, 'branch_id');
+        return $this->belongsTo(Branch::class, 'branch_id');
     }
 }

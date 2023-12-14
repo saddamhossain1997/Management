@@ -178,19 +178,19 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                            <a href="{{route('showAccount')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Accounts</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/boxed.html" class="nav-link">
+                            <a href="{{route('showCash')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Cash</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/boxed.html" class="nav-link">
+                            <a href="{{route('showMobile')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Mobile Banking</p>
                             </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use DateTime;
 use Illuminate\Http\Request;
 
 class BankController extends Controller
@@ -26,6 +27,7 @@ class BankController extends Controller
     public function storeBank(Request $request)
     {
         $bank_status = new Bank();
+        $bank_status->date = $request->date;
         $bank_status->bank_name = $request->bank_name;
         $bank_status->bank_status = $request->bank_status;
         $bank_status->save();
@@ -43,5 +45,14 @@ class BankController extends Controller
         Bank::findOrFail($id)->update(['bank_status' =>  $bank_status]);
 
         return redirect()->back();
+    }
+    public function search(Request $request)
+    {
+        $date = new DateTime($request->search);
+        $format = $date->format('d F y');
+
+        $formatDates = Bank::where('date', $date)->latest()->get();
+
+        return view('admin.bank.search', compact('formatDates'));
     }
 }

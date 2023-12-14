@@ -10,38 +10,34 @@
                 <div class="card mt-4">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a class="btn btn-primary" href="{{route('showBankPage')}}">Add Bank</a>
+                            <a class="btn btn-primary" href="{{route('showMobilePage')}}">Add Mobile Bank</a>
                         </h3>
-                        <!-- <form action="{{route('search')}}" method="post">
-                            @csrf
-                            <h3>
-                                <input type="date" name="search">
-                                <button type="submit">Search</button>
-                            </h3>
-                        </form> -->
-                        <div id="successMessage" style="display: none; color:blue; text-align:end">
-                        </div>
+
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Date:</th>
-                                    <th>Bank Name:</th>
-                                    <th>Bank Status:</th>
+                                    <th>Name:</th>
+                                    <th>Mobile No:</th>
+                                    <th>Opening Balance:</th>
+                                    <th>Total:</th>
+                                    <th>Status:</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $banks as $bank)
+                                @foreach( $mobiles as $mobile)
                                 <tr>
-                                    <td>{{$bank->date}}</td>
-                                    <td>{{$bank->bank_name}}</td>
-                                    <td> @if( $bank->bank_status == 1)
-                                        <a href="{{route('ActiveBank',$bank->id)}}"> Active</a>
+                                    <td>{{$mobile->mobile_name}}</td>
+                                    <td>{{$mobile->mobile}}</td>
+                                    <td>{{$mobile->mobile_opening_balance}}</td>
+                                    <td>{{$mobile->mobile_opening_balance}}</td>
+                                    <td> @if( $mobile->mobile_status == 1)
+                                        <a href="{{route('ActiveMobile',$mobile->id)}}"> Active</a>
                                         @else
-                                        <a href="{{route('ActiveBank',$bank->id)}}"> Deactive</a>
+                                        <a href="{{route('ActiveMobile',$mobile->id)}}"> Deactive</a>
                                         @endif
                                     </td>
                                     <td><a href="$">Edit</a></td>
