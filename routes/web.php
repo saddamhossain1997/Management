@@ -7,6 +7,7 @@ use App\Http\Controllers\BigappleController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BricksController;
 use App\Http\Controllers\CashController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EstimateFloorController;
 use App\Http\Controllers\EstimateProjectController;
 use App\Http\Controllers\MobileBankingController;
@@ -26,13 +27,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/bigapple', [BigappleController::class, 'showBig'])->name('showBig');
 Route::post('/add/big/apple', [BigappleController::class, 'storeBig'])->name('storeBig');
 Route::get('/details/big/apple/{id}', [BigappleController::class, 'detailBig'])->name('detailBig');
@@ -96,3 +97,10 @@ Route::get('/mobile/store/page', [MobileBankingController::class, 'showMobilePag
 Route::post('/add/mobile', [MobileBankingController::class, 'storeMobile'])->name('storeMobile');
 Route::get('/mobile/active/{bank_id}', [MobileBankingController::class, 'ActiveMobile'])->name('ActiveMobile');
 // ====================mobile route end ========================
+// ====================department route start ========================
+Route::get('/department', [DepartmentController::class, 'showDepartment'])->name('showDepartment');
+Route::get('/department/store/page', [DepartmentController::class, 'showDepartmentPage'])->name('showDepartmentPage');
+Route::post('/add/department', [DepartmentController::class, 'storeDepartment'])->name('storeDepartment');
+Route::get('/department/active/{department_id}', [DepartmentController::class, 'ActiveDepartment'])->name('ActiveDepartment');
+
+// ====================department route end ========================
