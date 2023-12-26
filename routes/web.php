@@ -8,6 +8,8 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BricksController;
 use App\Http\Controllers\CashController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EstimateFloorController;
 use App\Http\Controllers\EstimateProjectController;
 use App\Http\Controllers\MobileBankingController;
@@ -104,3 +106,18 @@ Route::post('/add/department', [DepartmentController::class, 'storeDepartment'])
 Route::get('/department/active/{department_id}', [DepartmentController::class, 'ActiveDepartment'])->name('ActiveDepartment');
 
 // ====================department route end ========================
+// ====================designation route start ========================
+Route::get('/designation', [DesignationController::class, 'showDesignation'])->name('showDesignation');
+Route::get('/designation/store/page', [DesignationController::class, 'showDesignationPage'])->name('showDesignationPage');
+Route::post('/add/designation', [DesignationController::class, 'storeDesignation'])->name('storeDesignation');
+Route::get('/designation/active/{department_id}', [DesignationController::class, 'ActiveDesignation'])->name('ActiveDesignation');
+
+// ====================designation route end ========================
+
+// ====================employee route start ========================
+Route::get('/employee', [EmployeeController::class, 'showEmployee'])->name('showEmployee');
+Route::get('/employee/store/page', [EmployeeController::class, 'showEmployeePage'])->name('showEmployeePage');
+Route::post('/add/employee', [EmployeeController::class, 'storeEmployee'])->name('storeEmployee');
+Route::get('/get-employee/{employee_id}', [EmployeeController::class, 'getEmployee'])->name('getEmployee');
+
+// ====================employee route end ========================

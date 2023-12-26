@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class Designation extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
-    public function designations()
+    public function department()
     {
-        return $this->hasMany(Designation::class, 'department_id');
+        return $this->belongsTo(Department::class, 'department_id');
     }
 }
+
